@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>magicplan Field Guide — Onboarding Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface2: #f1f1f1;
+    --border: #d0d0d0;
+    --border-strong: #aaaaaa;
+    --text: #161616;
+    --text-muted: #333333;
+    --text-hint: #777777;
+    --accent: #0099ee;
+    --accent-light: rgba(0,153,238,0.08);
+    --accent-mid: #0088dd;
+    --warn-bg: rgba(255,142,43,0.10);
+    --warn-text: #b85000;
+    --info-bg: rgba(0,153,238,0.08);
+    --info-text: #0077cc;
+    --danger-bg: rgba(200,0,0,0.08);
+    --danger-text: #bb0000;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #f1f1f1;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: #ffffff;
+    color: #161616;
+    padding: 0 2rem;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-mid);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-mark svg { width: 20px; height: 20px; fill: white; }
+  .logo-text { font-size: 15px; font-weight: 500; color: #fff; letter-spacing: -0.01em; }
+  .logo-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+  .header-headline { flex: 1; min-width: 220px; }
+  .header-headline h1 {
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    color: #161616;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .header-headline h1 strong { font-weight: 700; color: #0099ee; }
+  .header-headline p { font-size: 15px; color: #444444; line-height: 1.6; max-width: 380px; }
+
+  /* ── Contact bar ── */
+  .contact-bar {
+    background: #0099ee;
+    padding: 0 2rem;
+  }
+  .contact-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .contact-label { font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+  .contact-items { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .contact-item { display: flex; align-items: center; gap: 8px; }
+  .contact-item span { font-size: 13px; color: rgba(255,255,255,0.9); }
+  .contact-item strong { color: #fff; font-weight: 500; }
+  .contact-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+
+  /* ── Navigation ── */
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 2px solid #d0d0d0;
+  }
+  .nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 14px 18px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
+
+  /* ── Main layout ── */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0099ee;
+    margin-bottom: 6px;
+  }
+  .section-header p {
+    font-size: 17px;
+    color: #333333;
+  }
+
+  /* ── Steps ── */
+  .step-list { display: flex; flex-direction: column; gap: 1px; }
+  .step {
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-left: 4px solid #0099ee;
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .step:hover { border-color: var(--border-strong); }
+  .step-num {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    background: #0099ee;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: #ffffff;
+    margin-top: 2px;
+  }
+  .step-num.alpha { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; }
+  .step-body { flex: 1; }
+  .step-body h3 { font-size: 14px; font-weight: 700; color: #161616; margin-bottom: 5px; }
+  .step-body p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
+
+  .callout {
+    margin-top: 10px;
+    padding: 9px 13px;
+    border-radius: var(--radius-sm);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .callout-tip { background: var(--accent-light); color: var(--accent); border-left: 3px solid var(--accent-mid); }
+  .callout-warn { background: var(--warn-bg); color: var(--warn-text); border-left: 3px solid #d48a20; }
+  .callout-info { background: var(--info-bg); color: var(--info-text); border-left: 3px solid #3b6fd4; }
+
+  /* ── Cards ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.75rem;
+  }
+  .card {
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-left: 4px solid #0099ee;
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  .card h3 {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-hint);
+    margin-bottom: 12px;
+  }
+  .card ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .card ul li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .card ul li::before { content: ""; }
+
+  /* ── FAQ ── */
+  .faq { display: flex; flex-direction: column; gap: 8px; }
+  .faq-item {
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-left: 4px solid #0099ee;
+    border-radius: var(--radius);
+  }
+  .faq-q {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    color: #161616;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: background 0.1s;
+    white-space: normal;
+    word-break: normal;
+  }
+  .faq-q:hover { background: var(--surface2); }
+  .faq-icon {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--text-muted);
+    transition: transform 0.2s, background 0.1s;
+  }
+  .faq-item.open .faq-icon { background: #0099ee; color: #fff; border-color: #0099ee; }
+  .faq-a {
+    display: none;
+    padding: 0 1.25rem 1rem;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ── Contact section ── */
+  .contact-section {
+    background: #0099ee;
+    border: none;
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 2rem 2rem;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .contact-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: #ffffff; }
+  .contact-section p { font-size: 13px; color: rgba(255,255,255,0.9); }
+  .contact-details { display: flex; flex-direction: column; gap: 8px; }
+  .contact-row { display: flex; align-items: center; gap: 10px; }
+  .contact-row-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); width: 72px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .contact-row-val { font-size: 14px; color: #ffffff; font-weight: 500; }
+  .contact-row-val a { color: #ffffff; text-decoration: underline; font-weight: 500; }
+  .contact-row-val a:hover { opacity: 0.8; }
+
+  /* ── Badge ── */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 500;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  .badge-beta { background: var(--warn-bg); color: var(--warn-text); }
+  .badge-new { background: var(--accent-light); color: var(--accent); }
+
+  /* ── Progress indicator ── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--accent-mid);
+    width: 0%;
+    transition: width 0.1s;
+    z-index: 999;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--text-hint);
+    border-top: 1px solid #e2e2e2;
+    margin-top: 4rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .header-inner { padding: 1.75rem 0 1.5rem; }
+    .header-headline h1 { font-size: 22px; }
+    .main { padding: 2rem 1.25rem 4rem; }
+    .step { padding: 1rem 1.1rem; }
+    .contact-section { flex-direction: column; }
+  }
+
+  .bar-nav-btn {
+    flex-shrink: 0;
+    padding: 22px 14px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .bar-nav-btn:hover { color: #fff; }
+  .bar-nav-btn.active { color: #fff; border-bottom-color: #fff; font-weight: 700; }
+  .bar-nav-btn.quick-solutions {
+    margin-left: 12px;
+    padding-left: 18px;
+    border-left: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.95);
+    font-style: italic;
+  }
+  .bar-nav-btn.quick-solutions::before {
+    content: "⚡ ";
+    font-style: normal;
+    font-size: 12px;
+  }
+  .bar-nav-btn.quick-solutions:hover { color: #fff; }
+  .bar-nav-btn.quick-solutions.active { color: #fff; border-bottom-color: #fff; font-weight: 700; }
+
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo" style="align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 230" style="height:80px;width:80px;display:block;flex-shrink:0;"><polygon fill="#009fe3" points="0 0 0 230 70 230 70 210 20 210 20 20 210 20 210 210 160 210 160 230 230 230 230 0 0 0"/><path fill="#161616" d="M149.03,75.13c-12.77,0-24.01,5.54-30.01,14.93-4.46-9.69-14-14.77-24.93-14.93-10.93,0-20.62,5.54-25.39,14.31v-12h-19.7v83.56h20.01v-45.86c0-13.08,8.16-21.55,19.39-21.55,10.62,0,17.6,7.85,17.6,20.93v46.48h20v-46.02c0-12.93,8.1-21.39,19.34-21.39,10.46,0,17.66,7.23,17.66,20.78v46.63h20v-50.33c0-11.08-3.34-19.7-9.65-26.01-6.31-6.31-14.31-9.54-24.32-9.54Z"/></svg>
+    </div>
+    <div class="header-headline">
+      <h1>Your <strong>onboarding reference</strong><br>for magicplan</h1>
+      <p>Everything your team needs to know — from first scan to exporting your ESX.</p>
+      <a href="YOUR_PDF_URL_HERE" download="magicplan_onboarding_guide.pdf" style="
+        display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+        background:#0099ee;color:#ffffff;text-decoration:none;
+        font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+        padding:10px 18px;border-radius:6px;transition:background 0.15s;
+      " onmouseover="this.style.background='#007acc'" onmouseout="this.style.background='#0099ee'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF Guide
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Navigation bar -->
+<nav class="contact-bar" id="section-bar" style="padding:0 2rem;">
+  <div style="max-width:860px;margin:0 auto;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+    <button class="bar-nav-btn active" onclick="showSection('setup', this)">Getting started</button>
+    <button class="bar-nav-btn" onclick="showSection('scanning', this)">Scanning</button>
+    <button class="bar-nav-btn" onclick="showSection('editing', this)">Editing</button>
+    <button class="bar-nav-btn" onclick="showSection('photos', this)">Photos &amp; 360s</button>
+    <button class="bar-nav-btn" onclick="showSection('export', this)">Exporting</button>
+    <button class="bar-nav-btn" onclick="showSection('cloud', this)">magicplan Cloud</button>
+    <button class="bar-nav-btn quick-solutions" onclick="showSection('faq', this)">Quick Solutions</button>
+  </div>
+</nav>
+
+<!-- Content -->
+<main class="main">
+
+  <!-- Getting Started -->
+  <div id="setup" class="section active">
+    <div class="section-header">
+      <h2>Getting started</h2>
+      <p>Three steps to get you up and running.</p>
+    </div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Create your magicplan account</h3>
+          <p>Download the app from the Apple App Store or Google Play Store and open it. Select the sign-up option, enter your email, and create a password. Agree to the terms and conditions to complete registration.</p>
+          <div class="callout callout-info">For a full walkthrough including signing up via the magicplan Cloud, visit <a href="https://help.magicplan.app/create-your-magicplan-account" target="_blank" style="color:#0099ee;font-weight:500;">help.magicplan.app/create-your-magicplan-account</a>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Switch to your company workspace</h3>
+          <p>If your team is already using magicplan, you will receive an email invitation to join your company workspace — this is the most common way new team members get set up. Accept the invite and you'll be added automatically. Once in the app, tap the workspace name at the top left of the home screen to confirm you're in the correct company workspace. You only have to do this once.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Create your first project</h3>
+          <p>Tap the + sign on the home screen → New Project. Name it using your team's convention (typically: owner name + address + claim number). Add the address using geolocation or enter it manually. Then tap + next to Floor Plans to start the floor plan.</p>
+          <div class="callout callout-tip">During training, prefix your project name with "Test" + your first name. Your solutions consultant can credit those back after the session.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scanning -->
+  <div id="scanning" class="section">
+    <div class="section-header">
+      <h2>Auto scanning</h2>
+      <p>The core workflow for building an instant floor plan in the field.</p>
+    </div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Confirm your device compatibility</h3>
+          <p>magicplan's AutoScan feature requires an iPhone 12 Pro or newer, or an iPad Pro (2020 generation or newer). Non-Pro devices can still use Manual Scan with corner detection, photo documentation, connecting a 360 camera, and all other core functionality.</p>
+          <div class="callout callout-info">For a full list of supported devices, visit <a href="https://help.magicplan.app/supported-devices" target="_blank" style="color:#0099ee;font-weight:500;">help.magicplan.app/supported-devices</a>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Prepare the space</h3>
+          <p>Turn on all lights. In a power-out scenario, use a portable battery-powered floodlight — the scan will still work in dim conditions, but maximum light gives the best result. Close doors to rooms you're not yet scanning.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Tap the red record button, then select the room type</h3>
+          <p>Go to Insert → Room → Auto Scan and tap the red record button to start. Then select the room type (kitchen, bedroom, bathroom, etc.). This ensures any photos you take during the scan are automatically labeled and associated to the correct room in your photo report.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Move slowly — sweep the device up and down</h3>
+          <p>Move around the room at a moderate pace, tilting the device up toward the ceiling and down toward the floor as you go. This gives the app enough data to accurately detect walls, windows, and ceiling height.</p>
+          <div class="callout callout-tip">Toggle the 2D view (button next to the record button) to see a map of what you've captured so far and confirm no walls are missing.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Scan section by section — not the whole floor at once</h3>
+          <p>After finishing one room or area, tap the red record button to stop and confirm the scan. Then move to the next section and tap "Scan another room." Only tap Done when you've finished the entire floor. The app assembles the connected floor plan using GPS.</p>
+          <div class="callout callout-warn">Scanning more than 2,000 sq ft in a single session will strain the app. Break very large floors into two sessions and join them in the editor.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Leave closets and pantries closed</h3>
+          <p>Small closets and pantries are full of shelves and clutter, making it hard for LiDAR to measure depth accurately. Leave them closed during the scan. After, you can fill them in with the Filler Room tool in about 10 seconds. Exception: walk-in closets large enough to stand in can be scanned normally.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <h3>Take photos and dictate notes while scanning</h3>
+          <p>Use the shutter button (above the record button) to take photos mid-scan — they auto-tag to the current room. Use the microphone button (above the shutter) to dictate a voice note describing what you observe. It transcribes automatically and attaches to the room.</p>
+          <div class="callout callout-info">Voice transcript is a public beta feature. Ask your solutions consultant to enable it for your account.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <h3>Choose which objects to include when finishing</h3>
+          <p>After tapping Done, a window lets you include or exclude object categories (furniture, appliances, plumbing fixtures). Furniture rarely needs to come through to Xactimate — deselect it and check "Remember my choices" so it stays off by default.</p>
+          <div class="callout callout-tip">Save scan recording videos. They're stored in the cloud at no extra cost and can be valuable if a dispute arises later.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editing -->
+  <div id="editing" class="section">
+    <div class="section-header">
+      <h2>Editing</h2>
+      <p>How to verify, adjust, and complete your scan in the editor.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Manual room methods</h3>
+        <ul>
+          <li><b>Add square room</b> — drops an 8×2 default; drag to resize or verify with your Bluetooth laser</li>
+          <li><b>Draw room</b> — tap points to map any irregular shape</li>
+          <li><b>Filler room</b> — fills structural gaps in the floor plan instantly</li>
+          <li><b>Filler wall</b> — use if filler room snaps to the wrong wall</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Key editor actions</h3>
+        <ul>
+          <li>Select a wall → drag to resize</li>
+          <li>Add corner — push or pull a section of wall</li>
+          <li>Edit layout — reposition or rotate entire rooms</li>
+          <li>Long press a room to enter edit layout mode</li>
+        </ul>
+      </div>
+    </div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Pair your Bluetooth laser</h3>
+          <p>To verify measurements, open any dimension in the editor and tap "Laser." The app detects your device make and model. Tap Connect. After the first pairing, it reconnects automatically whenever the laser is on — you never have to think about it again.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Verify dimensions with your Bluetooth laser</h3>
+          <p>Tap any blue dimension on the floor plan, open your laser, and click once. The measurement locks with a padlock icon. Verify any dimension critical to your estimate — the scan is fast and accurate, but a laser gives you certainty.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Split open-concept rooms</h3>
+          <p>If a kitchen, dining room, and living room scanned together: select a wall point → Split Room → delete the dividing wall that appears. Repeat for each split. Then open each section's Details panel and change the room type. They'll now have separate labels and surface area calculations.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Fill in closets after scanning</h3>
+          <p>Insert → Room → Add Filler → Filler Room → Closet. Drop the bullseye indicator into the gap. If filler room tries to fill the wrong area, use Filler Wall instead, then open Details and change the room type to Closet.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Use elevation view for windows and cabinets</h3>
+          <p>Switch to Elevation View at the bottom of the screen to see walls vertically. You can verify "distance from floor" for windows and reposition cabinets with precision. Cycle between walls using the left/right arrows. Often overlooked — highly useful for estimate accuracy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Open the Details panel for any element</h3>
+          <p>iPad: tap the eye icon at top right. iPhone: swipe up from the bottom of the screen. Details let you change room type, set ceiling height, adjust wall thickness, attach photos or notes, and add affected areas for scoping.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photos -->
+  <div id="photos" class="section">
+    <div class="section-header">
+      <h2>Photos, videos &amp; 360s</h2>
+      <p>Building a complete, organized photo report alongside your floor plan.</p>
+    </div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Attach photos at the right level</h3>
+          <p>Photos can be attached at the project level (exterior shots), floor level, room level, or even to individual walls and objects. Use project-level for exterior documentation, room-level for damage documentation, and object-level for specific elements like windows or cabinets.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Annotate and redact within the app</h3>
+          <p>After taking photos, tap Next → Edit. Use arrows to indicate source of loss, add text boxes, draw shapes, and change annotation colors. Use the redaction tool to blur family portraits or sensitive information before anything goes into the report. Tap Save All when done.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Tag every photo <span class="badge badge-beta">Beta</span></h3>
+          <p>After photos, tap Tags to apply labels like "pre-mitigation," "daily departure," "emergency," or create a custom tag. Tags let you filter quickly when building reports on the cloud. On multi-day jobs with multiple 360s, tagging each day's scan clearly is essential.</p>
+          <div class="callout callout-tip">This feature was built directly from SERVPRO feedback. It saves significant time at the reporting stage — make it a habit from day one.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Connect your Ricoh or Insta360 camera</h3>
+          <p>In the camera app, select 360. First time only: enter the serial number from the bottom of your camera (both code sections). After that, the camera is remembered and connects automatically. Capture as many 360s as needed per session using the shutter button.</p>
+          <div class="callout callout-warn">If only the first 360 uploads then stalls, first update magicplan via the App Store and restart your camera. If the issue persists, remove the camera from saved Bluetooth devices and re-pair. Still stuck? Note your Ricoh model and contact your solutions consultant.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Share a 360 tour with adjusters and homeowners</h3>
+          <p>On the cloud, open your project photos → Export Photos → 360 Tour. Name it and publish. A shareable link is generated instantly. Anyone with the link can view the tour in a browser — no magicplan account required. Send it to insurance carriers, adjusters, or the homeowner.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export -->
+  <div id="export" class="section">
+    <div class="section-header">
+      <h2>Exporting files</h2>
+      <p>Getting your sketch, photo report, and tour out of magicplan and into Xactimate or your inbox.</p>
+    </div>
+    <div class="callout callout-warn" style="margin-bottom:1.5rem;">
+      <strong>Sync before you export.</strong> magicplan works fully offline — scanning, editing, photos, 360s — but you need a data connection to generate exports. Pull down on the home screen to manually sync first. If you've been working without signal, sync when you're back online before generating any exports.
+    </div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Export the ESX for Xactimate</h3>
+          <p>From the floor plan view: tap the two squares + arrow icon at top right → Verisk. Or from project overview, tap Export on the left. Enable photo compression to maximize how many photos are included. If the export fails, toggle photos off — you've likely hit the size limit.</p>
+          <div class="callout callout-warn">Xactimate limits ESX files to 100MB of photos. With compression, you can fit roughly 200 photos. Above that, exclude photos from the ESX and share them via the photo report PDF or 360 tour link instead.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Export the FML for Cotality</h3>
+          <p>Same export menu → tap Integrations to find the FML option. You can generate and re-export as many times as needed within a project at no additional cost.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>The file doesn't appear right away — here's why</h3>
+          <p>Files are generated in the cloud, not on your device. After exporting, pull down on the home screen to sync. Go back into the project and scroll down to the File section — it'll be there. Files also appear on the magicplan Cloud.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Generate the PDF photo report</h3>
+          <p>On the cloud: open project photos → Export Photos → PDF. Choose photos per page, toggle date/time/author display. The PDF is interactive — recipients can click embedded videos and 360s directly from the file. No app or account needed to view it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Wall thickness and Xactimate alignment</h3>
+          <p>If walls look misaligned in Xactimate after importing the ESX, this is a known behavior resulting from how the two platforms store floor plans differently — not a measurement error in your original sketch. Objects added in magicplan before export will import correctly and their surface area deductions will work as expected when deduction preferences are correctly configured in Xactimate.<br><br>If reference blocks won't snap to a wall, see the Recommended Solutions section of our reference guide, or add the object in magicplan and re-export the ESX.</p>
+          <div class="callout callout-info">Ask your estimator to check the default wall thickness in Xactimate settings, then match that value in magicplan at the floor level via Details → Wall Thickness. magicplan is actively working with Verisk on a long-term fix.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cloud -->
+  <div id="cloud" class="section">
+    <div class="section-header">
+      <h2>magicplan Cloud</h2>
+      <p>What to set up once, and how your office team can access everything from a browser at <a href="https://cloud.magicplan.app/" target="_blank" style="color:#0099ee;text-decoration:none;">cloud.magicplan.app</a>.</p>
+    </div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Check your workspace when you first log in</h3>
+          <p>Same as the app — you may land in your personal workspace. Click the workspace name at top left and switch to your company workspace. Do this once and it will persist.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Invite your whole team — it's unlimited users</h3>
+          <p>Go to Members → enter email and name → assign to a team. magicplan Pro has no per-user charge, so invite everyone who will ever need to view or work on projects. Remove members from this same screen when someone leaves.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>See all team projects</h3>
+          <p>By default the cloud only shows your own projects. Click "See all projects of workspace members" to view everything your colleagues are building. Filter by team or by individual member to find what you need quickly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Reassign projects between team members</h3>
+          <p>Open a project → Assign To → select a colleague. They receive an email notification and can continue the work. Only the assigned owner can edit — others can view. Make sure the project is fully synced before reassigning.</p>
+          <div class="callout callout-tip">Where possible, have the same person start and finish a job. Reassigning mid-job works fine, but keeping one owner reduces confusion on large projects.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Two settings worth turning on</h3>
+          <p>In Settings on the magicplan Cloud, these two options are off by default but worth considering for most teams:</p>
+          <p style="margin-top:10px;"><strong style="color:#161616;">Convert 360 spherical images to cubic faces when downloading</strong> — when enabled, every 360 photo automatically generates 6 flat images (front, back, left, right, top, bottom). Useful if your team or carriers need standard flat images alongside the 360 tour, without any extra work on site.</p>
+          <p style="margin-top:10px;"><strong style="color:#161616;">File versioning</strong> — when enabled, each new export creates a new file rather than overwriting the previous one. Helpful if you re-export ESX or PDF files frequently and want to keep a clear history of versions — particularly useful on longer or more complex jobs.</p>
+          <div class="callout callout-tip">Neither setting is required, but both are low-effort to enable and can save time down the line. Worth a conversation with your team before deciding.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Set up company profiles per office</h3>
+          <p>In Company Profile: upload your logo and enter contact details. If you have multiple offices, create a team for each and configure a separate profile per team. Each office can have its own logo and contact information on all generated reports.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div id="faq" class="section">
+    <div class="section-header">
+      <h2>Quick Solutions</h2>
+      <p>Fast answers to the most common questions.</p>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          The ESX file isn't generating. What's wrong?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">There are two things to check:<br><br><strong>1. Check your sketch for overlapping walls.</strong> Open the floor plan editor and look for any areas that appear incorrect or misaligned — overlapping walls are a common cause of export failures. Make the necessary corrections and try re-exporting the ESX.<br><br><strong>2. Check your photo size.</strong> The ESX file has a 100MB photo limit set by Xactimate/Verisk — not magicplan. Go to the export settings, turn off photo inclusion, and export again. If you want photos in the ESX, enable photo compression first. With compression on, you can usually include around 200 photos before hitting the limit.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Walls look misaligned in Xactimate after importing the ESX.
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">This is usually a wall thickness mismatch. magicplan defaults to a 4¾" interior wall; Xactimate defaults to 4". When the values differ, a thin ghost wall appears behind the Xactimate wall, which can prevent blocks from being placed and cause visual misalignment. Match the default interior wall thickness in both apps. magicplan is in active discussions with Verisk about a permanent fix.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Two rooms scanned as one. How do I separate them?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Open the floor plan editor, select a point on the wall where you want to divide the space, and tap Split Room. A wall line appears — delete it (you just want the division, not a physical wall). Repeat for additional splits. Open each section's Details panel and change the room type. They'll now have separate labels and surface area calculations.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          I forgot to split rooms before exporting the ESX. Too late?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Not at all. Split the rooms in the editor and re-export the ESX. You can export as many times as needed within the same project with no additional charge.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          The filler room snapped to the wrong exterior wall.
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">This happens when the app can't find the correct structural boundary and latches onto a far exterior wall instead. Undo, then go to Insert → Room → Add Filler → Filler Wall. Drop it into the gap. Then select it, open Details, and change the room type from "hatched room" to Closet or whatever is appropriate.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          The 360 camera only uploads the first photo, then stalls.
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Start by making sure you're running the latest version of magicplan — search for magicplan in the App Store and update if one is available. Then restart your 360 camera. If the problem persists, remove the camera from your saved Bluetooth devices and re-pair it to magicplan.<br><br>This is a known issue that varies by camera model and firmware. Recent models like the Ricoh 360 X3 should not experience this under normal conditions. If the problem continues after troubleshooting, note your specific Ricoh model (e.g., 360 X3, SC2) and contact your solutions consultant directly.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          I don't see my colleagues' projects on the cloud.
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Click "See all projects of workspace members" on the cloud home screen — by default you only see your own. Also confirm you're in the correct company workspace, not your personal one. Both are the most common reasons for this.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can a colleague pick up and continue a project I started?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Yes, but only one person can be the active owner at a time. Sync the project fully, then reassign ownership in the cloud (open the project → Assign To → select the colleague). They'll get an email notification and can continue. Where possible, have the same person start and finish a job to keep things simple.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          The space is a hoarder house or very cluttered. Will the scan work?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Floor-level clutter is generally manageable as long as the app can see where walls meet the ceiling. Move slowly and sweep the device up and down. If the auto scan struggles badly, switch to Draw Room — you tap points to define the room shape manually, then verify all dimensions with your Bluetooth laser.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I use magicplan without a LiDAR device?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Yes, however AutoScan will not be available. Manual Scan with corner detection will still be accessible along with full photo documentation, connecting a 360 camera, floor plan editing, and all exports. If your role is office-based — estimating, project management, reviewing — desktop access to the magicplan Cloud is often all you need.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact section -->
+  <div class="contact-section">
+    <div>
+      <h3>Questions? Reach out directly.</h3>
+      <p>Available during regular business hours — call, text, or email anytime.</p>
+    </div>
+    <div class="contact-details">
+      <div class="contact-row">
+        <span class="contact-row-label">Name</span>
+        <span class="contact-row-val">Kyle Morin</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Role</span>
+        <span class="contact-row-val">Senior Solutions Consultant</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Phone</span>
+        <span class="contact-row-val"><a href="tel:+18138514658">813-851-4658</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Email</span>
+        <span class="contact-row-val"><a href="mailto:kyle@magicplan.app">kyle@magicplan.app</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Helpdesk</span>
+        <span class="contact-row-val"><a href="mailto:helpdesk@magicplan.app">helpdesk@magicplan.app</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Web</span>
+        <span class="contact-row-val"><a href="https://www.magicplan.app" target="_blank">magicplan.app</a></span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  magicplan Field Guide &nbsp;·&nbsp; For internal use during onboarding &nbsp;·&nbsp; <a href="https://www.magicplan.app" style="color: inherit;">magicplan.app</a>
+</footer>
+
+<script>
+
+  const sectionMeta = {
+    setup:   { label: 'Getting Started',      desc: 'Workspace setup, device requirements, syncing and pairing your laser.' },
+    scanning:{ label: 'Scanning',             desc: 'Step-by-step auto scan workflow and best practices for the field.' },
+    editing: { label: 'Floor Plan Editing',   desc: 'Splitting rooms, filling closets, verifying dimensions and elevation view.' },
+    photos:  { label: 'Photos, Videos & 360s',desc: 'Tagging, annotation, redaction and connecting your 360 camera.' },
+    export:  { label: 'Exporting',            desc: 'ESX, FML, photo report PDF and the photo size limit workaround.' },
+    cloud:   { label: 'magicplan Cloud',         desc: 'Team visibility, reassigning projects and settings to configure once.' },
+    faq:     { label: 'Quick Solutions',        desc: 'Answers to the questions that come up most during onboarding.' },
+  };
+
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.bar-nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn) btn.classList.add('active');
+    if (sectionMeta[id]) {
+      document.getElementById('bar-section').textContent = sectionMeta[id].label;
+      document.getElementById('bar-desc').textContent = sectionMeta[id].desc;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const icon = btn.querySelector('.faq-icon');
+    item.classList.toggle('open');
+    icon.textContent = item.classList.contains('open') ? '-' : '+';
+  }
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+    document.getElementById('progress').style.width = (scrolled * 100) + '%';
+  });
+</script>
+</body>
+</html>
