@@ -708,7 +708,7 @@
         <div class="step-num">5</div>
         <div class="step-body">
           <h3>Wall thickness and Xactimate alignment</h3>
-          <p>If walls look misaligned in Xactimate after importing the ESX, this is a known behavior resulting from how the two platforms store floor plans differently — not a measurement error in your original sketch. Objects added in magicplan before export will import correctly and their surface area deductions will work as expected when deduction preferences are correctly configured in Xactimate.<br><br>If reference blocks won't snap to a wall, see the Recommended Solutions section of our reference guide, or add the object in magicplan and re-export the ESX.</p>
+          <p>If walls look misaligned in Xactimate after importing the ESX, this is a known behavior resulting from how the two platforms store floor plans differently — not a measurement error in your original sketch. magicplan works with rooms and their interior shapes, while Xactimate works with individually defined walls. This means walls are recalculated during the conversion process and small offsets can occasionally occur.<br><br>Objects added in magicplan before export will import correctly and their surface area deductions will work as expected when deduction preferences are correctly configured in Xactimate. Verisk has confirmed they are working on improvements to snapping in Sketch, though there is currently no timeframe for releasing those improvements. magicplan is in active discussions with Verisk on this.<br><br>For a full guide on reference block placement, ask your solutions consultant for the ESX to Xactimate Reference Block Placement Guide.</p>
           <div class="callout callout-info">Ask your estimator to check the default wall thickness in Xactimate settings, then match that value in magicplan at the floor level via Details → Wall Thickness. magicplan is actively working with Verisk on a long-term fix.</div>
         </div>
       </div>
@@ -790,7 +790,7 @@
           Walls look misaligned in Xactimate after importing the ESX.
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">This is usually a wall thickness mismatch. magicplan defaults to a 4¾" interior wall; Xactimate defaults to 4". When the values differ, a thin ghost wall appears behind the Xactimate wall, which can prevent blocks from being placed and cause visual misalignment. Match the default interior wall thickness in both apps. magicplan is in active discussions with Verisk about a permanent fix.</div>
+        <div class="faq-a">This is a known behavior resulting from how the two platforms store floor plans differently — not a measurement error in your original sketch. magicplan works with rooms and their interior shapes, while Xactimate works with individually defined walls, so walls are recalculated during the conversion and small offsets can occasionally occur. Objects added in magicplan before export will import correctly. Verisk has confirmed they are working on improvements to snapping, though there is currently no timeframe. magicplan is in active discussions with Verisk on this. See the ESX to Xactimate Reference Block Placement Guide for full details.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
