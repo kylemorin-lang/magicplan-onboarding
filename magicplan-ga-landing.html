@@ -120,11 +120,6 @@
       background: #000;
       line-height: 0;
     }
-    .iphone-screen video {
-      width: 100%;
-      display: block;
-      border-radius: 34px;
-    }
     .iphone-home {
       width: 100px; height: 5px;
       background: #444;
@@ -449,9 +444,13 @@
         <div class="iphone-frame">
           <div class="iphone-notch"></div>
           <div class="iphone-screen">
-            <video autoplay muted loop playsinline>
-              <source src="MP_APPSTORE_IPHONE.mp4" type="video/mp4">
-            </video>
+            <iframe
+              src="https://www.youtube.com/embed/Iajeafsyf2g?autoplay=1&mute=1&loop=1&playlist=Iajeafsyf2g&controls=0&modestbranding=1&rel=0&showinfo=0"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              style="width:100%;aspect-ratio:9/16;display:block;border-radius:34px;"
+            ></iframe>
           </div>
           <div class="iphone-home"></div>
         </div>
